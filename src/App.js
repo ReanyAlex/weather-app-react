@@ -125,10 +125,6 @@ class App extends Component {
                           time: this.getTime(),
                         }
 
-
-
-
-
       for (var i = 2; i < 9; i++) {
 
         var utcSeconds = values[1].forecast.forecastday[i].date_epoch;
