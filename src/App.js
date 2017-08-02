@@ -24,7 +24,8 @@ class App extends Component {
                   precip: Number,
                   time: Number,
                 },
-      forecast: []
+      forecast: [],
+      hourly: []
     }
   }
 
@@ -36,7 +37,7 @@ class App extends Component {
     let that = this
     document.getElementById("locationSearch").onclick = function() {
       // that.setState({location:{},current:{}, forecast:[]})
-      const apiKey = "3abee957470744b8ac851416172306"
+      const apiKey = "ba0e2262d3854085a9542224170208"
       let location = document.getElementById("location").value
       let locWeatherUrl = `https://api.apixu.com/v1/current.json?key=${apiKey}&q=` + location
       let weatherForecastUrl = `https://api.apixu.com/v1/forecast.json?key=${apiKey}&q=` + location + `&days=9`
@@ -79,7 +80,7 @@ class App extends Component {
     let that = this
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
-          const apiKey = "3abee957470744b8ac851416172306"
+          const apiKey = "ba0e2262d3854085a9542224170208"
           let location = position.coords.latitude + "," + position.coords.longitude
           let locWeatherUrl = `https://api.apixu.com/v1/current.json?key=${apiKey}&q=${location}`
 
@@ -125,8 +126,7 @@ class App extends Component {
                           time: this.getTime(),
                         }
 
-      for (var i = 2; i < 9; i++) {
-
+      for (let i = 2; i < 9; i++) {
         var utcSeconds = values[1].forecast.forecastday[i].date_epoch;
         var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
         d.setUTCSeconds(utcSeconds)
@@ -140,7 +140,19 @@ class App extends Component {
                         precip: values[1].forecast.forecastday[i].day.totalprecip_in
                       })
       }
-      this.setState({location, current, forecast: this.state.forecast})
+
+      this.setState({hourly:[]})
+      for (let j = 0; j <= 23; j++) {
+        let hourlyTemp = values[1].forecast.forecastday[0].hour[j].temp_f
+        this.state.hourly.push(hourlyTemp)
+      }
+
+      this.setState({ location,
+                      current,
+                      forecast: this.state.forecast,
+                      hourly: this.state.hourly
+                    })
+
       this.backgroundImage(values[0].current.condition.code)
   });
 }
@@ -157,12 +169,11 @@ backgroundImage(code){
           <Search location={this.state.location} />
           <div className="wrapper content-box">
             <Weather current={this.state.current}
-                     forecast={this.state.forecast}/>
+                     forecast={this.state.forecast}
+                     hourly={this.state.hourly}/>
             <Map location={this.state.location}/>
-
           </div>
-
-        </div>,
+        </div>
       </div>
 
     )
