@@ -6,7 +6,6 @@ class Chart extends Component {
 
   createLineChart(){
     let temp = this.props.hourly
-    console.log(temp);
     var div = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
@@ -92,14 +91,12 @@ class Chart extends Component {
 
   }
     componentDidMount() {
-      console.log('componentDidMount');
       document.getElementById('d3').innerHTML=""
         this.createLineChart()
     }
 
 
    componentDidUpdate() {
-     console.log('componentDidUpdate');
      document.getElementById('d3').innerHTML=""
       this.createLineChart()
    }

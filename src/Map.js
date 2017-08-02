@@ -14,7 +14,7 @@ class Map extends Component {
   render() {
     return (
       <div className="map col-4-md col-0-sm"
-            style={{ height: '400px'}}>
+            style={{ height: '510px'}}>
 
        <GoogleMapReact
           bootstrapURLKeys={{

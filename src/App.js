@@ -108,7 +108,7 @@ class App extends Component {
 
   Promise.all([local, forecast])
     .then(values => {
-      console.log(values);
+      // console.log(values);
       const location   = {
                           city: values[0].location.name,
                           region: values[0].location.region,
@@ -126,6 +126,7 @@ class App extends Component {
                           time: this.getTime(),
                         }
 
+      // this.setState({forecast:[]})
       for (let i = 2; i < 9; i++) {
         var utcSeconds = values[1].forecast.forecastday[i].date_epoch;
         var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
@@ -139,6 +140,7 @@ class App extends Component {
                         condition: values[1].forecast.forecastday[i].day.condition,
                         precip: values[1].forecast.forecastday[i].day.totalprecip_in
                       })
+
       }
 
       this.setState({hourly:[]})
