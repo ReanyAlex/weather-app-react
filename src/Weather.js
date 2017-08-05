@@ -42,7 +42,6 @@ class Weather extends Component {
                                   : <div className="forecast">Click To View Hourly Temperature Chart</div>}
 
           </div>
-
       </div>
     )
   }

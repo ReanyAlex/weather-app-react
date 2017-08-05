@@ -28,7 +28,8 @@ class Chart extends Component {
     var line = d3.line()
         .x(function(d, i) { return xScale(i); })
         .y(function(d, i) { return yScale(d.y); })
-        .curve(d3.curveMonotoneX)
+        .curve(d3.curveCardinal)
+
 
     var dataset = d3.range(n).map(function(d,i) { return {"y": temp[i]} })
 
@@ -41,7 +42,7 @@ class Chart extends Component {
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(xScale).ticks(24).tickFormat(function(d) {
+        .call(d3.axisBottom(xScale).ticks(12).tickFormat(function(d) {
           if (d >= 13) {
             return d-12+" PM"
           }
@@ -66,7 +67,8 @@ class Chart extends Component {
     svg.append("path")
         .datum(dataset)
         .attr("class", "line")
-        .attr("d", line);
+        .attr("d", line)
+
 
     svg.selectAll(".dot")
         .data(dataset)

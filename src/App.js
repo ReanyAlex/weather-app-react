@@ -160,7 +160,7 @@ class App extends Component {
 }
 
 backgroundImage(code){
-  document.body.style.backgroundImage = "url(" + conditionImage[code].photo + ")"
+  document.body.style.backgroundImage = `url( ${conditionImage[code].photo} )`
 }
 
   render() {

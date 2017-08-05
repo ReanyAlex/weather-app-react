@@ -252,7 +252,7 @@ svg{
 .line {
     fill: none;
     stroke: blue;
-    stroke-width: 2;
+    stroke-width: 3;
 }
 
 .dot {
